@@ -13,7 +13,7 @@ const Login = () => {
         }
     
         try {
-          const res = await fetch("http://localhost:3000/api/login", {
+          const res = await fetch(`${process.env.API_URL}/api/login`, {
             method: "POST",
             headers: {
               "Content-type": "application/json",

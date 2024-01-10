@@ -3,7 +3,7 @@ import EditForm from '@/app/components/EditForm';
 
 const getPassengerById = async (id) => {
     try{
-      const res = await fetch(`http://localhost:3000/api/passenger/${id}`,{
+      const res = await fetch(`${process.env.API_URL}/api/passenger/${id}`,{
         cache: "no-store",
       });
   

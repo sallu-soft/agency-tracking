@@ -3,7 +3,7 @@
 import Admin_Table from "../components/Admin_Table";
 import { redirect } from "next/navigation";
 const getAllPassenger = async () => {
-  const passenger = await fetch("http://localhost:3000/api/passenger");
+  const passenger = await fetch(`${process.env.API_URL}/api/passenger`);
   return passenger.json();
 }
 const AdminDashboard = async () => {

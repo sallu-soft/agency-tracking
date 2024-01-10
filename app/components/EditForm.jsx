@@ -75,7 +75,7 @@ const EditForm = ({id, Passenger}) => {
     
 
     try {
-      const res = await fetch(`http://localhost:3000/api/passenger/${id}`, {
+      const res = await fetch(`${process.env.API_URL}/api/passenger/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

@@ -1,7 +1,7 @@
 import React from 'react'
 import User_Table from '../components/User_Table';
 const getAllPassenger = async () => {
-  const passenger = await fetch("http://localhost:3000/api/passenger");
+  const passenger = await fetch(`${process.env.API_URL}/api/passenger`);
   return passenger.json();
 }
 const UserDashboard = async () => {

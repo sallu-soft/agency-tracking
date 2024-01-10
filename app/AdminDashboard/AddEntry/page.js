@@ -30,7 +30,7 @@ const AddEntry = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/user");
+        const response = await fetch(`${process.env.API_URL}/api/user`);
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -71,7 +71,7 @@ const AddEntry = () => {
     
 
     try {
-      const res = await fetch("http://localhost:3000/api/passenger", {
+      const res = await fetch(`${process.env.API_URL}/api/passenger`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

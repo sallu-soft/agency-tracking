@@ -1,7 +1,7 @@
 import SingleUser from "@/app/components/SingleUser";
 import { MdDeleteForever } from "react-icons/md";
 const getAllUsers = async () => {
-    const users = await fetch("http://localhost:3000/api/user");
+    const users = await fetch(`${process.env.API_URL}/api/user`);
     return users.json();
 }
 
