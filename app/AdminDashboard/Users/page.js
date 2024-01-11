@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { MdDeleteForever } from "react-icons/md";
 const getAllUsers = async () => {
     try {
-        const response = await fetch(`${process.env.API_URL}/api/user`);
+        const response = await fetch(`${process.env.API_URL}/api/user`,{cache:'no-store'});
 
         if (!response.ok) {
             if (response.status === 404) {

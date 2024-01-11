@@ -7,71 +7,66 @@ import DataTable from 'react-data-table-component';
 
 const columns = [
     {
-        name: 'name',
-        selector: row => row.name,
+        name: <p className="font-bold text-lg">Name</p>,
+        selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p>{row.passport_no}</p><p>{row.gender}</p></div>,
+        style: {
+            width: '300px', 
+            overflow:"hidden" // Set custom width for this column
+        },
     },
+    
     {
-        name: 'Passport No',
-        selector: row => row.passport_no,
-    },
-    {
-        name: 'Gender',
-        selector: row => row.gender,
-    },
-    {
-        name: 'Country',
+        name: <p className="font-bold text-lg">Country</p>,
         selector: row => row.country,
     },
     {
-        name: 'Medical',
+        name: <p className="font-bold text-lg">Medical</p>,
         selector: row => row.medical,
     },
     {
-        name: 'Mofa',
+        name: <p className="font-bold text-lg">Mofa</p>,
         selector: row => row.mofa,
     },
     {
-        name: 'Bio Finger',
+        name: <p className="font-bold text-lg">Biometric Finger</p>,
         selector: row => row.bio_finger,
     },
     {
-        name: 'pc_no',
-        selector: row => row.visa_no,
+        name: <p className="font-bold text-lg">PC No</p>,
+        selector: row => row.pc_no,
     },
     {
-        name: 'Visa/ID No',
-        selector: row => row.passport_no ,
+        name: <p className="font-bold text-lg">Visa/ID No</p>,
+        selector: row => <div className="min-w-[230px] flex gap-1 flex-col p-1"><h3 className="">{row.visa_no}</h3><p>{row.id_no}</p></div> ,
     },
     {
-        name: 'Training',
-        selector: row => row.training ,
-    },
-    {
-        name: 'BMET Finger',
-        selector: row => row.bmet_finger ,
-    },
-    {
-        name: 'Visa Stamping Date',
+        name: <p className="font-bold text-lg">Visa Stamping Date</p>,
         selector: row => row.visa_stamping_date ,
     },
     {
-        name: 'Manpower',
+        name: <p className="font-bold text-lg">Training</p>,
+        selector: row => row.training ,
+    },
+    {
+        name: <p className="font-bold text-lg">BMET Finger</p>,
+        selector: row => row.bmet_finger ,
+    },
+   
+    {
+        name: <p className="font-bold text-lg">Manpower</p>,
         selector: row => row.manpower ,
     },
     {
-        name: 'Delivery',
+        name: <p className="font-bold text-lg">Delivery</p>,
         selector: row => row.delivery ,
     },
     {
-        name: 'payment',
+        name: <p className="font-bold text-lg">Payment</p>,
         selector: row => row.payment ,
     },
+   
     {
-        name: 'Agent',
-        selector: row => row.agent ,
-    },
-    {
-        name: 'Remark',
+        name: <p className="font-bold text-lg">Remark</p>,
         selector: row => row.remark ,
     },
 ];
@@ -105,20 +100,11 @@ const User_Table = ({passenger}) => {
   return (
     <>
     <nav className="flex items-center top-0 sticky w-full justify-between bg-teal-500 py-3 px-6">
-        <Link href="/UserDashboard" className="flex items-center flex-shrink-0 text-white mr-6 hover:text-pink-800 text-xl cursor-pointer">
-          <svg
-            className="fill-current h-8 w-8 mr-2"
-            width="54"
-            height="54"
-            viewBox="0 0 54 54"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-          </svg>
-          <span className="font-semibold text-xl tracking-tight">
+        <p className="flex items-center flex-shrink-0 text-white mr-6 hover:text-pink-800 text-xl cursor-pointer">
+          
             {user?.name?.toUpperCase()}
-          </span>
-        </Link>
+          
+        </p>
 
         <div className="flex gap-3">
            
@@ -130,7 +116,7 @@ const User_Table = ({passenger}) => {
             </button>
         </div>
       </nav>
-    {/* <DataTable
+    <DataTable
             columns={columns}
             data={filter}
             pagination
@@ -140,8 +126,8 @@ const User_Table = ({passenger}) => {
                 <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 
             }
-        /> */}
-<input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        />
+{/* <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 <table class="min-w-full bg-white border border-gray-300">
             <thead>
                 <tr>
@@ -187,7 +173,7 @@ const User_Table = ({passenger}) => {
                
                
             </tbody>
-        </table>
+        </table> */}
         </>
   )
 }
