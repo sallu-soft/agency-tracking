@@ -130,7 +130,7 @@ const User_Table = ({passenger}) => {
             </button>
         </div>
       </nav>
-    <DataTable
+    {/* <DataTable
             columns={columns}
             data={filter}
             pagination
@@ -140,8 +140,8 @@ const User_Table = ({passenger}) => {
                 <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 
             }
-        />
-{/* <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        /> */}
+<input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 <table class="min-w-full bg-white border border-gray-300">
             <thead>
                 <tr>
@@ -187,7 +187,7 @@ const User_Table = ({passenger}) => {
                
                
             </tbody>
-        </table> */}
+        </table>
         </>
   )
 }
