@@ -30,6 +30,7 @@ const Login = () => {
           if (data.status === 200) {
              alert("Successfully Logged In!!");
              localStorage.setItem('user', JSON.stringify(data.user));
+             typeof window !== "undefined" ? window.localStorage.setItem('user', JSON.stringify(data.user)) : false;
             if(data.user.role==="admin"){
               router.push("/AdminDashboard")
             }else{

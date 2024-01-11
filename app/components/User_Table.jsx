@@ -79,14 +79,15 @@ const columns = [
 
 const User_Table = ({passenger}) => {
     const router = useRouter();
-    const user = JSON.parse(localStorage.getItem('user'));
+        const user =  typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+    
     console.log(user)
     const singleUsersData = passenger.filter((pax,index)=>{
         return pax.agent ===  user.name;
     })
     console.log(singleUsersData)
     const HandleLogout = () => {
-        localStorage.removeItem("user");
+        typeof window !== "undefined" ? window.localStorage.removeItem('user') : false;
         router.push('/')
       }
     const [search, setSearch]= useState('');
@@ -111,7 +112,7 @@ const User_Table = ({passenger}) => {
             <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
           </svg>
           <span className="font-semibold text-xl tracking-tight">
-            {user.name.toUpperCase()}
+            {user?.name?.toUpperCase()}
           </span>
         </Link>
 
@@ -135,7 +136,6 @@ const User_Table = ({passenger}) => {
                 <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 
             }
-            subHeaderAlign="right"
         />
         </>
   )
