@@ -1,10 +1,22 @@
 import SingleUser from "@/app/components/SingleUser";
 import { MdDeleteForever } from "react-icons/md";
 const getAllUsers = async () => {
-    const users = await fetch(`${process.env.API_URL}/api/user`);
-    return users.json();
-}
+    try {
+        const response = await fetch(`${process.env.API_URL}/api/user`);
 
+        // Check if the HTTP request was successful (status code in the range 200-299)
+        if (!response.ok) {
+            throw new Error(`Failed to fetch users. Status: ${response.status}`);
+        }
+
+        const users = await response.json();
+        return users;
+    } catch (error) {
+        console.error('Error fetching users:', error.message);
+        // Handle the error (e.g., show a user-friendly message or rethrow the error)
+        throw error;
+    }
+};
 const Users = async () => {
     
 
