@@ -116,6 +116,7 @@ const User_Table = ({passenger}) => {
             </button>
         </div>
       </nav>
+      <p className="p-5 text-xl font-bold">Total : {passenger.length}</p>
     <DataTable
             columns={columns}
             data={filter}

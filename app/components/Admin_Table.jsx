@@ -55,74 +55,66 @@ const Admin_Table = ({passenger}) => {
     const columns = [
         {
             name: 'Actions',
-            selector: row => <div className="flex items-center gap-2"><Link href={`AdminDashboard/EditEntry/${row._id}`}> <MdEditDocument className="text-2xl  text-green-600 font-bold"/></Link><MdDelete className="text-2xl text-red-800 font-bold cursor-pointer" onClick={()=>HandleRemove(row._id)}/></div>,
+            selector: row => <div className="flex items-center gap-2 w-[20]"><Link href={`AdminDashboard/EditEntry/${row._id}`}> <MdEditDocument className="text-2xl  text-green-600 font-bold"/></Link><MdDelete className="text-2xl text-red-800 font-bold cursor-pointer" onClick={()=>HandleRemove(row._id)}/></div>,
         },
         {
-            name: 'name',
-            selector: row => row.name,
+            name: <p className="font-bold text-lg">Name</p>,
+            selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p>{row.passport_no}</p><p>{row.gender}</p></div>,
+            
         },
+        
         {
-            name: 'Passport No',
-            selector: row => row.passport_no,
-        },
-        {
-            name: 'Gender',
-            selector: row => row.gender,
-        },
-        {
-            name: 'Country',
+            name: <p className="font-bold text-lg">Country</p>,
             selector: row => row.country,
         },
         {
-            name: 'Medical',
+            name: <p className="font-bold text-lg">Medical</p>,
             selector: row => row.medical,
         },
         {
-            name: 'Mofa',
+            name: <p className="font-bold text-lg">Mofa</p>,
             selector: row => row.mofa,
         },
         {
-            name: 'Bio Finger',
+            name: <p className="font-bold text-lg">Biometric Finger</p>,
             selector: row => row.bio_finger,
         },
         {
-            name: 'pc_no',
-            selector: row => row.visa_no,
+            name: <p className="font-bold text-lg">PC No</p>,
+            selector: row => row.pc_no,
         },
         {
-            name: 'Visa/ID No',
-            selector: row => row.passport_no ,
+            name: <p className="font-bold text-lg">Visa/ID No</p>,
+            selector: row => <div className="min-w-[230px] flex gap-1 flex-col p-1"><h3 className="">{row.visa_no}</h3><p>{row.id_no}</p></div> ,
         },
         {
-            name: 'Training',
-            selector: row => row.training ,
-        },
-        {
-            name: 'BMET Finger',
-            selector: row => row.bmet_finger ,
-        },
-        {
-            name: 'Visa Stamping Date',
+            name: <p className="font-bold text-lg">Visa Stamping Date</p>,
             selector: row => row.visa_stamping_date ,
         },
         {
-            name: 'Manpower',
+            name: <p className="font-bold text-lg">Training</p>,
+            selector: row => row.training ,
+        },
+        {
+            name: <p className="font-bold text-lg">BMET Finger</p>,
+            selector: row => row.bmet_finger ,
+        },
+       
+        {
+            name: <p className="font-bold text-lg">Manpower</p>,
             selector: row => row.manpower ,
         },
         {
-            name: 'Delivery',
+            name: <p className="font-bold text-lg">Delivery</p>,
             selector: row => row.delivery ,
         },
         {
-            name: 'payment',
+            name: <p className="font-bold text-lg">Payment</p>,
             selector: row => row.payment ,
         },
+       
         {
-            name: 'Agent',
-            selector: row => row.agent ,
-        },
-        {
-            name: 'Remark',
+            name: <p className="font-bold text-lg">Remark</p>,
             selector: row => row.remark ,
         },
     ];

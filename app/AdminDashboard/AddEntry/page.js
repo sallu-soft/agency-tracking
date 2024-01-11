@@ -352,9 +352,9 @@ const AddEntry = () => {
 </datalist>
 </div>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-2">
-      <TextInput name="name" id="name" type="text" placeholder="Type Name" lebel="Name" value={passenger.name} handleChange={(e)=>{setPassenger({...passenger,name:e.target.value});console.log(passenger)}} />
+      <TextInput name="name" id="name" type="text" placeholder="Type Name" lebel="Name" value={passenger.name} handleChange={(e)=>{setPassenger({...passenger,name:e.target.value});console.log(passenger)}} isRequired={true}/>
 
-      <TextInput name="passport_no" id="passport_no" type="text" placeholder="Type Passport No" lebel="Passport No" value={passenger.passport_no} handleChange={(e)=>{setPassenger({...passenger,passport_no:e.target.value});console.log(passenger)}} />
+      <TextInput name="passport_no" id="passport_no" type="text" placeholder="Type Passport No" lebel="Passport No" value={passenger.passport_no} handleChange={(e)=>{setPassenger({...passenger,passport_no:e.target.value});console.log(passenger)}} isRequired={true}/>
 
       {/* <TextInput name="gender" id="gender" type="text" placeholder="Type Gender" lebel="Gender" value={passenger.gender} handleChange={(e)=>{setPassenger({...passenger,gender:e.target.value});console.log(passenger)}} /> */}
       <div className="mb-4">
@@ -363,7 +363,6 @@ const AddEntry = () => {
          name="gender" id="gender" placeholder="Type Gender" lebel="Gender" value={passenger.gender} 
           className="form-input mt-1 block w-full p-2 text-black"
           onChange={(e) => {setPassenger({...passenger, gender: e.target.value})}}
-          required
         >
         <option value="" disabled>Select Gender</option>
         <option value="Male" >Male</option>
@@ -384,14 +383,14 @@ const AddEntry = () => {
     id="country"
     className="form-input mt-1 block w-full p-2 text-black"
     onChange={(e) => {setPassenger({...passenger, country: e.target.value})}}
-    required />
+    />
     <datalist id="countrys">
     <option value="" disabled>Select Country</option>
     {countries.map((coun,ind) => <option key={coun} value={coun}>{coun}</option>)}
 </datalist>
 </div>
 
-      <TextAreaInput name="medical" id="medical" placeholder="Medical Name, Issue and Expire Date" lebel="Medical Information" value={passenger.medical} handleChange={(e)=>{setPassenger({...passenger,medical:e.target.value});console.log(passenger)}} />
+      <TextAreaInput name="medical" id="medical" placeholder="Medical Name, Issue and Expire Date" lebel="Medical" value={passenger.medical} handleChange={(e)=>{setPassenger({...passenger,medical:e.target.value});console.log(passenger)}} />
 
       <TextInput name="mofa" id="mofa" type="text" placeholder="Type Mofa" lebel="Mofa" value={passenger.mofa} handleChange={(e)=>{setPassenger({...passenger,mofa:e.target.value});console.log(passenger)}} />
 
