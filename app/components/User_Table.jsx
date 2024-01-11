@@ -126,7 +126,7 @@ const User_Table = ({passenger}) => {
             </button>
         </div>
       </nav>
-    <DataTable
+    {/* <DataTable
             columns={columns}
             data={filter}
             pagination
@@ -136,7 +136,54 @@ const User_Table = ({passenger}) => {
                 <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 
             }
-        />
+        /> */}
+
+<table class="min-w-full bg-white border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b">Name</th>
+                    <th class="py-2 px-4 border-b">Passport No</th>
+                    <th class="py-2 px-4 border-b">Gender</th>
+                    <th class="py-2 px-4 border-b">Country</th>
+                    <th class="py-2 px-4 border-b">Medical</th>
+                    <th class="py-2 px-4 border-b">Mofa</th>
+                    <th class="py-2 px-4 border-b">Bio Finger</th>
+                    <th class="py-2 px-4 border-b">Visa No</th>
+                    <th class="py-2 px-4 border-b">Visa/ID No</th>
+                    <th class="py-2 px-4 border-b">Training</th>
+                    <th class="py-2 px-4 border-b">BMET Finger</th>
+                    <th class="py-2 px-4 border-b">Visa Stamping Date</th>
+                    <th class="py-2 px-4 border-b">Manpower</th>
+                    <th class="py-2 px-4 border-b">Delivery</th>
+                    <th class="py-2 px-4 border-b">Payment</th>
+                    <th class="py-2 px-4 border-b">Agent</th>
+                    <th class="py-2 px-4 border-b">Remark</th>
+                </tr>
+            </thead>
+            <tbody>
+                {filter.map((item,ind)=> <tr key={item._id}>
+                    <td class="py-2 px-4 border-b">{item.name}</td>
+                    <td class="py-2 px-4 border-b">{item.passport_no}</td>
+                    <td class="py-2 px-4 border-b">{item.gender}</td>
+                    <td class="py-2 px-4 border-b">{item.country}</td>
+                    <td class="py-2 px-4 border-b">{item.medical}</td>
+                    <td class="py-2 px-4 border-b">{item.mofa}</td>
+                    <td class="py-2 px-4 border-b">{item.bio_finger}</td>
+                    <td class="py-2 px-4 border-b">{item.visa_no}</td>
+                    <td class="py-2 px-4 border-b">{item.id_no}</td>
+                    <td class="py-2 px-4 border-b">{item.training}</td>
+                    <td class="py-2 px-4 border-b">{item.bmet_finger}</td>
+                    <td class="py-2 px-4 border-b">{item.visa_stamping_date}</td>
+                    <td class="py-2 px-4 border-b">{item.manpower}</td>
+                    <td class="py-2 px-4 border-b">{item.delivery}</td>
+                    <td class="py-2 px-4 border-b">{item.payment}</td>
+                    <td class="py-2 px-4 border-b">{item.agent}</td>
+                    <td class="py-2 px-4 border-b">{item.remark}</td>
+                </tr>)}
+               
+               
+            </tbody>
+        </table>
         </>
   )
 }
