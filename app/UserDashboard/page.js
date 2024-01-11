@@ -11,7 +11,7 @@ const getAllPassenger = async () => {
               return [];
           }
 
-          throw new Error(`Failed to fetch passengers. Status: ${response.status}`);
+          throw new Error(`Failed to fetch passengers. Status: ${response.status}`,{cache:"no-store"});
       }
 
       const passengers = await response.json();
