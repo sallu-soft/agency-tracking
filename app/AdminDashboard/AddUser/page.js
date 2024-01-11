@@ -1,8 +1,18 @@
 "use client"
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import { redirect, useRouter } from 'next/navigation';
+import React, { useLayoutEffect, useState } from 'react'
 
 const AddUser = () => {
+//   const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+//   if(!auth) {
+//     redirect("/");
+// }
+useLayoutEffect(() => {
+  const isAuth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+  if(!isAuth){
+    redirect("/")
+  }
+}, [])
   const router = useRouter();
   const [user,setUser] = useState({
     name:"",

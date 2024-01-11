@@ -1,5 +1,6 @@
 import React from 'react'
 import User_Table from '../components/User_Table';
+import { redirect } from 'next/navigation';
 const getAllPassenger = async () => {
   try {
       const response = await fetch(`${process.env.API_URL}/api/passenger`);
@@ -21,7 +22,12 @@ const getAllPassenger = async () => {
   }
 };
 const UserDashboard = async () => {
+  // const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+  
   const passenger = await getAllPassenger();
+//   if(!passenger) {
+//     redirect("/");
+// }
   return (
     <div>
       <User_Table passenger={passenger}/>

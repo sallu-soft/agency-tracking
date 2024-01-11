@@ -1,5 +1,6 @@
 // "use client"
 // import React, { useLayoutEffect } from "react";
+import { redirect } from "next/navigation";
 import Admin_Table from "../components/Admin_Table";
 const getAllPassenger = async () => {
   try {
@@ -22,7 +23,14 @@ const getAllPassenger = async () => {
   }
 };
 const AdminDashboard = async () => {
+  // console.log("hellow")
+  // const isLoggedIn = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+  // console.log(isLoggedIn)
+  // if (!isLoggedIn) {
+  //   redirect("/");
+  // }
   const passenger = await getAllPassenger(); 
+
   // useLayoutEffect(()=>{
   //   const storedUserData = localStorage.getItem('user');
   //   const user = storedUserData ? JSON.parse(storedUserData) : null; 

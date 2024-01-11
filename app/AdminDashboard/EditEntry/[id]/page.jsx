@@ -1,5 +1,6 @@
 
 import EditForm from '@/app/components/EditForm';
+import { redirect } from 'next/navigation';
 
 const getPassengerById = async (id) => {
     try{
@@ -18,7 +19,10 @@ const getPassengerById = async (id) => {
 const EditEntry =async ({params}) => {
     const {id} = params;
     const passenger = await getPassengerById(id);
-  
+  //   const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+  //   if(!auth) {
+  //     redirect("/");
+  // }
     
   
   return (

@@ -26,6 +26,12 @@ const Admin_Table = ({passenger}) => {
     const router = useRouter()
     const [search, setSearch]= useState('');
     const [filter, setFilter]= useState([]);
+    const user =  typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+    useEffect(()=>{
+        if(!user){
+            redirect("/")
+        }
+    },[]);
     const HandleRemove = async (id)=>{
         try {
             const res = await fetch(`/api/passenger/${id}`, {

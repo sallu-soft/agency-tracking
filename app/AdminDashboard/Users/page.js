@@ -1,4 +1,5 @@
 import SingleUser from "@/app/components/SingleUser";
+import { redirect } from "next/navigation";
 import { MdDeleteForever } from "react-icons/md";
 const getAllUsers = async () => {
     try {
@@ -21,7 +22,10 @@ const getAllUsers = async () => {
     }
 };
 const Users = async () => {
-    
+//     const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+//   if(!auth) {
+//     redirect("/");
+// }
 
     const users = await getAllUsers();
   return (

@@ -1,7 +1,7 @@
 "use client"
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import { redirect, useRouter } from 'next/navigation';
+import React, { useEffect, useState,useEffectLayout } from 'react'
 
 import DataTable from 'react-data-table-component';
 
@@ -80,10 +80,14 @@ const columns = [
 const User_Table = ({passenger}) => {
     const router = useRouter();
         const user =  typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
-    
+    useEffect(()=>{
+        if(!user){
+            redirect("/")
+        }
+    },[]);
     console.log(user)
     const singleUsersData = passenger.filter((pax,index)=>{
-        return pax.agent ===  user.name;
+        return pax.agent ===  user?.name;
     })
     console.log(singleUsersData)
     const HandleLogout = () => {
@@ -126,7 +130,7 @@ const User_Table = ({passenger}) => {
             </button>
         </div>
       </nav>
-    {/* <DataTable
+    <DataTable
             columns={columns}
             data={filter}
             pagination
@@ -136,8 +140,8 @@ const User_Table = ({passenger}) => {
                 <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 
             }
-        /> */}
-
+        />
+{/* <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 <table class="min-w-full bg-white border border-gray-300">
             <thead>
                 <tr>
@@ -183,7 +187,7 @@ const User_Table = ({passenger}) => {
                
                
             </tbody>
-        </table>
+        </table> */}
         </>
   )
 }

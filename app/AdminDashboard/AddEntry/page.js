@@ -1,8 +1,8 @@
 "use client"
 import TextAreaInput from '@/app/components/TextAreaInput';
 import TextInput from '@/app/components/TextInput'
-import { useRouter } from 'next/navigation'
-import React, { useState, useEffect } from 'react';
+import { redirect, useRouter } from 'next/navigation'
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 
 const AddEntry = () => {
   const [users, setUsers] = useState([]);
@@ -27,6 +27,12 @@ const AddEntry = () => {
     agent:"",
     status:"",
   });
+  useLayoutEffect(() => {
+    const isAuth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
+    if(!isAuth){
+      redirect("/")
+    }
+  }, [])
   useEffect(() => {
     const fetchData = async () => {
       try {
