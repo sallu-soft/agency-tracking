@@ -28,7 +28,7 @@ const Admin_Table = ({passenger}) => {
     const [filter, setFilter]= useState([]);
     const HandleRemove = async (id)=>{
         try {
-            const res = await fetch(`${process.env.API_URL}/api/passenger/${id}`, {
+            const res = await fetch(`/api/passenger/${id}`, {
               method: "DELETE",
               headers: {
                 "Content-type": "application/json",

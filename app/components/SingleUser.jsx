@@ -10,7 +10,7 @@ const SingleUser = ({item}) => {
    
 
         try {
-          const res = await fetch(`${process.env.API_URL}/api/user`, {
+          const res = await fetch(`/api/user`, {
             method: "DELETE",
             headers: {
               "Content-type": "application/json",

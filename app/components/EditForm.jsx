@@ -36,7 +36,7 @@ const EditForm = ({id, Passenger}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/user");
+        const response = await fetch("/api/user");
         if (!response.ok) {
           throw new Error("Failed to fetch users");
         }
@@ -75,7 +75,7 @@ const EditForm = ({id, Passenger}) => {
     
 
     try {
-      const res = await fetch(`${process.env.API_URL}/api/passenger/${id}`, {
+      const res = await fetch(`/api/passenger/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

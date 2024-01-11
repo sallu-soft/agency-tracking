@@ -18,7 +18,7 @@ const AddUser = () => {
     }
 
     try {
-      const res = await fetch(`${process.env.API_URL}/api/user`, {
+      const res = await fetch(`/api/user`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

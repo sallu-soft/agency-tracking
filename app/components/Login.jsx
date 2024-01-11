@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 
 const Login = () => {
     const router = useRouter()
+    const url = `/api/login`;
+          console.log(url)
     const handleSubmit = async (e) => {
         e.preventDefault();
         const {name, password} = user;
@@ -11,9 +13,11 @@ const Login = () => {
           alert("Name and Passwordare required.");
           return;
         }
-    
+     
         try {
-          const res = await fetch(`${process.env.API_URL}/api/login`, {
+          const url = `/api/login`;
+          console.log(url)
+          const res = await fetch(url, {
             method: "POST",
             headers: {
               "Content-type": "application/json",
