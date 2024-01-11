@@ -4,8 +4,12 @@ const getAllUsers = async () => {
     try {
         const response = await fetch(`${process.env.API_URL}/api/user`);
 
-        // Check if the HTTP request was successful (status code in the range 200-299)
         if (!response.ok) {
+            if (response.status === 404) {
+                // Handle 404 error, for example, by returning an empty array or showing a user-friendly message.
+                return [];
+            }
+
             throw new Error(`Failed to fetch users. Status: ${response.status}`);
         }
 
@@ -13,7 +17,6 @@ const getAllUsers = async () => {
         return users;
     } catch (error) {
         console.error('Error fetching users:', error.message);
-        // Handle the error (e.g., show a user-friendly message or rethrow the error)
         throw error;
     }
 };
