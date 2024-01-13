@@ -6,22 +6,6 @@ import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import { MdDelete, MdEditDocument } from 'react-icons/md';
 
-
-
-
-
-const data = [
-    {
-        id: 1,
-        title: 'Beetlejuice',
-        year: '1988',
-    },
-    {
-        id: 2,
-        title: 'Ghostbusters',
-        year: '1984',
-    },
-]
 const Admin_Table = ({passenger}) => {
     const router = useRouter()
     const [search, setSearch]= useState('');
@@ -124,7 +108,7 @@ const Admin_Table = ({passenger}) => {
     ];
     useEffect(()=>{
         const result= passenger.filter((item)=>{
-         return item?.name?.toLowerCase().match(search.toLocaleLowerCase()) || item?.passport_no?.toLowerCase().match(search.toLocaleLowerCase());
+         return item?.name?.toLowerCase().match(search.toLocaleLowerCase()) || item?.passport_no?.toLowerCase().match(search.toLocaleLowerCase()) || item?.agent?.toLowerCase().match(search.toLocaleLowerCase())
         });
         setFilter(result);
     },[search]);
