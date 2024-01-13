@@ -117,6 +117,10 @@ const Admin_Table = ({passenger}) => {
             name: <p className="font-bold text-lg">Remark</p>,
             selector: row => row.remark ,
         },
+        {
+            name: <p className="font-bold text-lg">Agent</p>,
+            selector: row => row.agent ,
+        },
     ];
     useEffect(()=>{
         const result= passenger.filter((item)=>{

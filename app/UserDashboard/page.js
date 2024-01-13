@@ -3,7 +3,7 @@ import User_Table from '../components/User_Table';
 import { redirect } from 'next/navigation';
 const getAllPassenger = async () => {
   try {
-      const response = await fetch(`${process.env.API_URL}/api/passenger`);
+      const response = await fetch(`${process.env.API_URL}/api/passenger`,{cache:'no-store'});
 
       if (!response.ok) {
           if (response.status === 404) {
@@ -11,7 +11,7 @@ const getAllPassenger = async () => {
               return [];
           }
 
-          throw new Error(`Failed to fetch passengers. Status: ${response.status}`,{cache:"no-store"});
+          throw new Error(`Failed to fetch passengers. Status: ${response.status}`);
       }
 
       const passengers = await response.json();
