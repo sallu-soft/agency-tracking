@@ -7,29 +7,30 @@ import DataTable from 'react-data-table-component';
 
 const columns = [
     {
-        name: <p className="font-bold text-lg">Name</p>,
-        selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p>{row.passport_no}</p><p>{row.gender}</p></div>,
-        style: {
-            width: '300px', 
-            overflow:"hidden" // Set custom width for this column
-        },
+        name: <p className="font-bold text-lg min-w-[300px]">Name</p>,
+        selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p className="font-semibold">{row.passport_no}</p><p>{row.gender}</p></div>,
+        minWidth:"250px",
     },
     
     {
         name: <p className="font-bold text-lg">Country</p>,
         selector: row => row.country,
+        wrap:true
     },
     {
         name: <p className="font-bold text-lg">Medical</p>,
-        selector: row => row.medical,
+        selector: row => <div className="font-semibold">{row.medical}</div>,
+        wrap:true,
     },
     {
         name: <p className="font-bold text-lg">Mofa</p>,
         selector: row => row.mofa,
+        wrap:true,
     },
     {
         name: <p className="font-bold text-lg">Biometric Finger</p>,
         selector: row => row.bio_finger,
+        wrap:true,
     },
     {
         name: <p className="font-bold text-lg">PC No</p>,
@@ -38,6 +39,7 @@ const columns = [
     {
         name: <p className="font-bold text-lg">Visa/ID No</p>,
         selector: row => <div className="min-w-[230px] flex gap-1 flex-col p-1"><h3 className="">{row.visa_no}</h3><p>{row.id_no}</p></div> ,
+        minWidth:"150px",
     },
     {
         name: <p className="font-bold text-lg">Visa Stamping Date</p>,
@@ -66,8 +68,15 @@ const columns = [
     },
    
     {
-        name: <p className="font-bold text-lg">Remark</p>,
+        name: <p className="font-bold text-lg">Message</p>,
         selector: row => row.remark ,
+        minWidth:"100px",
+        wrap:true,
+    },
+    {
+        name: <p className="font-bold text-lg">Status</p>,
+        selector: row => row.status ,
+        wrap:true
     },
 ];
 

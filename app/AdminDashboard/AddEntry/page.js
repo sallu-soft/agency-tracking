@@ -300,9 +300,10 @@ const AddEntry = () => {
           status
         }),
       });
-      
+      const data = await res.json();
       if (res.ok) {
         router.push("/AdminDashboard");
+        console.log(data)
         alert("Successfully Created Your New Passenger")
         router.refresh();
       } else {
@@ -423,18 +424,7 @@ const AddEntry = () => {
     handleChange={(e)=>{setPassenger({...passenger,remark:e.target.value})}} lebel="Message" />
       <TextAreaInput value={passenger.status} name="status" id="status" placeholder="Status"
     handleChange={(e)=>{setPassenger({...passenger,status:e.target.value})}} lebel="Status" />
-      {/* <div className="mb-4">
-  <label className="block text-white">Remark</label>
-  <textarea
-    value={passenger.remark}
-    name={"remark"}
-    id={"remark"}
-    className="form-input mt-1 block w-full p-2"
-    placeholder={"Remark"}
-    onChange={(e)=>{setPassenger({...passenger,remark:e.target.value})}}
-    required
-  />
-      </div> */}
+      
 
      
      

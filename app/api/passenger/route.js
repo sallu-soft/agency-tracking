@@ -24,12 +24,12 @@ export async function POST(request){
         payment,
         remark,
         agent,
-        statusM
+        status
     } = await request.json();
 
-    console.log(statusM)
+    console.log(status)
     await connectMongoDB();
-    await Passenger.create({name,
+    const passenger = await Passenger.create({name,
         passport_no,
         gender,
         country,
@@ -47,10 +47,10 @@ export async function POST(request){
         payment,
         remark,
         agent,
-        statusM
+        status
         
     })
-    return NextResponse.json({message:"Passenger Created successfully"},{status:201});
+    return NextResponse.json(passenger,{message:"Passenger Created successfully"},{status:201});
 }
 
 export async function GET(){

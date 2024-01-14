@@ -1,7 +1,7 @@
 import mongoose, {Schema} from "mongoose";
 
 const passengerSchema = new Schema({
-    name:{},
+    name:String,
   passport_no:{
     type:String,
     unique:true,

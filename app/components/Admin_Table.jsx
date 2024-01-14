@@ -38,30 +38,35 @@ const Admin_Table = ({passenger}) => {
     }
     const columns = [
         {
-            name: 'Actions',
-            selector: row => <div className="flex items-center gap-2 w-[20]"><Link href={`AdminDashboard/EditEntry/${row._id}`}> <MdEditDocument className="text-2xl  text-green-600 font-bold"/></Link><MdDelete className="text-2xl text-red-800 font-bold cursor-pointer" onClick={()=>HandleRemove(row._id)}/></div>,
+            name: <p className="font-bold text-lg ">Actions</p>,
+            selector: row => <div className="flex  items-center gap-2"><Link href={`AdminDashboard/EditEntry/${row._id}`}> <MdEditDocument className="text-2xl  text-green-600 font-bold"/></Link><MdDelete className="text-2xl text-red-800 font-bold cursor-pointer" onClick={()=>HandleRemove(row._id)}/></div>,
+            maxWidth:"25px"
         },
         {
-            name: <p className="font-bold text-lg">Name</p>,
-            selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p>{row.passport_no}</p><p>{row.gender}</p></div>,
-            
+            name: <p className="font-bold text-lg min-w-[300px]">Name</p>,
+            selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p className="font-semibold">{row.passport_no}</p><p>{row.gender}</p></div>,
+            minWidth:"250px",
         },
         
         {
             name: <p className="font-bold text-lg">Country</p>,
             selector: row => row.country,
+            wrap:true
         },
         {
             name: <p className="font-bold text-lg">Medical</p>,
-            selector: row => row.medical,
+            selector: row => <div className="font-semibold">{row.medical}</div>,
+            wrap:true,
         },
         {
             name: <p className="font-bold text-lg">Mofa</p>,
             selector: row => row.mofa,
+            wrap:true,
         },
         {
             name: <p className="font-bold text-lg">Biometric Finger</p>,
             selector: row => row.bio_finger,
+            wrap:true,
         },
         {
             name: <p className="font-bold text-lg">PC No</p>,
@@ -70,6 +75,7 @@ const Admin_Table = ({passenger}) => {
         {
             name: <p className="font-bold text-lg">Visa/ID No</p>,
             selector: row => <div className="min-w-[230px] flex gap-1 flex-col p-1"><h3 className="">{row.visa_no}</h3><p>{row.id_no}</p></div> ,
+            minWidth:"150px",
         },
         {
             name: <p className="font-bold text-lg">Visa Stamping Date</p>,
@@ -98,12 +104,20 @@ const Admin_Table = ({passenger}) => {
         },
        
         {
-            name: <p className="font-bold text-lg">Remark</p>,
+            name: <p className="font-bold text-lg">Message</p>,
             selector: row => row.remark ,
+            minWidth:"100px",
+            wrap:true,
         },
         {
             name: <p className="font-bold text-lg">Agent</p>,
             selector: row => row.agent ,
+            wrap:true,
+        },
+        {
+            name: <p className="font-bold text-lg">Status</p>,
+            selector: row => row.status ,
+            wrap:true
         },
     ];
     useEffect(()=>{
@@ -114,6 +128,7 @@ const Admin_Table = ({passenger}) => {
     },[search]);
   return (
     <DataTable
+
             columns={columns}
             data={filter}
             pagination
@@ -123,7 +138,7 @@ const Admin_Table = ({passenger}) => {
                 <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
 
             }
-            subHeaderAlign="right"
+            subHeaderAlign="left"
         />
   )
 }

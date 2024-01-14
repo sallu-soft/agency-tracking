@@ -397,6 +397,7 @@ const EditForm = ({id, Passenger}) => {
       <TextAreaInput name="payment" id="payment" placeholder="Type Payment Information" lebel="Payment" value={passenger?.payment} handleChange={(e)=>{setPassenger({...passenger,payment:e.target.value});console.log(passenger)}} />
 
       <TextAreaInput name="remark"
+      value={passenger?.remark}
     id="remark" placeholder="Message"
     handleChange={(e)=>{setPassenger({...passenger,remark:e.target.value})}} lebel="Message" />
       <TextAreaInput value={passenger?.status} name="status" id="status" placeholder="Status"
