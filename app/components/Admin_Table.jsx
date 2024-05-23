@@ -36,6 +36,14 @@ const Admin_Table = ({passenger}) => {
             console.log(error);
           }
     }
+    function formatDate(dateString) {
+        if (!dateString) return "";
+        let date = new Date(dateString);
+        let day = String(date.getUTCDate()).padStart(2, '0');
+        let month = String(date.getUTCMonth() + 1).padStart(2, '0');
+        let year = date.getUTCFullYear();
+        return `${day}-${month}-${year}`;
+    }
     const columns = [
         {
             name: <p className="font-bold text-lg ">Actions</p>,
@@ -44,7 +52,7 @@ const Admin_Table = ({passenger}) => {
         },
         {
             name: <p className="font-bold text-lg min-w-[300px]">Name</p>,
-            selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p className="font-semibold">{row.passport_no}</p><p>{row.gender}</p></div>,
+            selector: row => <div className="flex gap-1 flex-col p-1"><h3 className="font-bold text-md uppercase">{row.name}</h3><p className="font-semibold">{row.passport_no}</p><p>{row.gender}</p><p>{formatDate(row?.createdAt)}</p></div>,
             minWidth:"250px",
         },
         
