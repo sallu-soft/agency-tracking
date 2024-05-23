@@ -2,8 +2,10 @@
 import Link from 'next/link';
 import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect, useState,useEffectLayout } from 'react'
+import { CSVLink } from 'react-csv';
 
 import DataTable from 'react-data-table-component';
+import { FaFileDownload } from 'react-icons/fa';
 
 const columns = [
     {
@@ -110,6 +112,25 @@ const User_Table = ({passenger}) => {
         });
         setFilter(result);
     },[search]);
+    const extractedData = filter.map((row) => ({
+        Name: row?.name,
+        Passport: row?.passport_no,
+        Gender: row?.gender,
+        Country: row?.country,
+        Medical: row?.medical,
+        Mofa: row?.mofa,
+        "Bio Finger": row?.bio_finger,
+        "Police Clearance": row?.pc_no,
+        "Visa No": row?.visa_no,
+        "ID No": row?.id_no,
+        "Visa Stamping Date": row?.visa_stamping_date,
+        "Training": row?.trainging,
+        "BMET Finger": row?.bmet_finger,
+        "Manpower": row?.manpower,
+        "Delivery": row?.delivery,
+        "Payment": row?.payment,
+        "Remark": row?.remark,
+    }))
   return (
     <>
     <nav className="flex items-center top-0 sticky w-full justify-between bg-teal-500 py-3 px-6">
@@ -136,8 +157,8 @@ const User_Table = ({passenger}) => {
             pagination
             highlightOnHover
             subHeader
-            subHeaderComponent={
-                <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/>
+            subHeaderComponent={<div className="flex justify-between items-center w-full">
+                <input type="text" className="w-25 form-control border-2 border-blue-500 p-2 rounded-md" placeholder="Search..." value={search} onChange={(e)=>setSearch(e.target.value)}/><CSVLink data={extractedData} filename="hello" className="bg-blue-700 p-3 my-5 text-white flex items-center justify-center w-fit rounded"><FaFileDownload className="mr-2"/> Download</CSVLink></div>
 
             }
         />
