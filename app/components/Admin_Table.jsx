@@ -89,7 +89,7 @@ const Admin_Table = ({passenger}) => {
               if (medicalDate) {
                   const timeDiff = medicalDate.getTime() - now.getTime();
                   daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                  daysRemaining = Math.max(daysRemaining, 0);
+                  daysRemaining = Math.max(90-daysRemaining, 0);
               }
   
               return (
@@ -134,7 +134,7 @@ const Admin_Table = ({passenger}) => {
             if (visaDate) {
                 const timeDiff = visaDate.getTime() - now.getTime();
                 daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                daysRemaining = Math.max(daysRemaining, 0);
+                daysRemaining = Math.max(90-daysRemaining, 0);
             }
 
             return (
