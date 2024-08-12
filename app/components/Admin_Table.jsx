@@ -7,11 +7,26 @@ import { CSVLink } from 'react-csv';
 import DataTable from 'react-data-table-component';
 import { MdDelete, MdEditDocument } from 'react-icons/md';
 import { FaFileDownload } from "react-icons/fa";
+import TextInput from './TextInput';
 
 const Admin_Table = ({passenger}) => {
     const router = useRouter()
     const [search, setSearch]= useState('');
+    
     const [filter, setFilter]= useState([]);
+    const [pass, setPass]= useState({
+        name:"",
+        mofa:"",
+        medical:"",
+        visa_no:"",
+        bio_finger:"",
+        bmet_finger:"",
+        training:"",
+        delivery:"",
+        manpower:"",
+
+    });
+    const [daysRemaining, setDaysRemaining] = useState(0);
     const user =  typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
     useEffect(()=>{
         if(!user){
@@ -65,17 +80,38 @@ const Admin_Table = ({passenger}) => {
         },
         {
             name: <p className="font-bold text-lg">Medical</p>,
-            selector: row => <div className="font-semibold">{row.medical}</div>,
+            selector: row => {
+              const now = new Date();
+              const medicalDate = row?.medical_date ? new Date(row.medical_date) : null;
+              
+              // Calculate the difference if medicalDate is available
+              let daysRemaining = 'N/A';
+              if (medicalDate) {
+                  const timeDiff = medicalDate.getTime() - now.getTime();
+                  daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                  daysRemaining = Math.max(daysRemaining, 0);
+              }
+  
+              return (
+                  <div className="font-semibold">
+                      {row.medical} <br />
+                      {medicalDate ? formatDate(medicalDate) : 'N/A'}<br />
+                      <span className="text-red-600">
+                          {daysRemaining === 'N/A' ? '' : `${daysRemaining} days remaining`}
+                      </span>
+                  </div>
+              );
+          },
             wrap:true,
         },
         {
             name: <p className="font-bold text-lg">Mofa</p>,
-            selector: row => row.mofa,
+            selector: row => row?.mofa,
             wrap:true,
         },
         {
             name: <p className="font-bold text-lg">Biometric Finger</p>,
-            selector: row => row.bio_finger,
+            selector: row => <div className="min-w-[230px] flex gap-1 flex-col p-1"><h3 className="">{row.bio_finger}</h3><p>{row.bio_status}</p></div>,
             wrap:true,
         },
         {
@@ -89,7 +125,28 @@ const Admin_Table = ({passenger}) => {
         },
         {
             name: <p className="font-bold text-lg">Visa Stamping Date</p>,
-            selector: row => row.visa_stamping_date ,
+            selector: row => {
+              const now = new Date();
+            const visaDate = row?.visa_stamping_date ? new Date(row.visa_stamping_date) : null;
+            
+            // Calculate the difference if medicalDate is available
+            let daysRemaining = 'N/A';
+            if (visaDate) {
+                const timeDiff = visaDate.getTime() - now.getTime();
+                daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                daysRemaining = Math.max(daysRemaining, 0);
+            }
+
+            return (
+                <div className="font-semibold">
+                    
+                    {visaDate ? formatDate(visaDate) : 'N/A'}<br />
+                    <span className="text-red-600">
+                        {daysRemaining === 'N/A' ? '' : `${daysRemaining} days remaining`}
+                    </span>
+                </div>
+            ); 
+          },
         },
         {
             name: <p className="font-bold text-lg">Training</p>,
@@ -103,6 +160,8 @@ const Admin_Table = ({passenger}) => {
         {
             name: <p className="font-bold text-lg">Manpower</p>,
             selector: row => row.manpower ,
+            
+            wrap: true,
         },
         {
             name: <p className="font-bold text-lg">Delivery</p>,
@@ -136,6 +195,68 @@ const Admin_Table = ({passenger}) => {
         });
         setFilter(result);
     },[search]);
+    useEffect(() => {
+      // Update the countdown every 24 hours
+      const interval = setInterval(() => {
+        setDaysRemaining((prev) => Math.max(prev - 1, 0));
+      }, 1000 * 60 * 60 * 24); // 24 hours in milliseconds
+  
+      // Cleanup interval on component unmount
+      return () => clearInterval(interval);
+    }, []);
+    useEffect(() => {
+        let result = passenger;
+    
+        if (pass.name) {
+          result = result.filter((item) =>
+            item.agent?.toLowerCase().includes(pass.name.toLowerCase())
+          );
+        }
+        
+        if (pass.medical) {
+          result = result.filter((item) =>
+            item.medical?.toLowerCase().includes(pass.medical.toLowerCase())
+          );
+        }
+        
+        if (pass.mofa) {
+          result = result.filter((item) =>
+            item.mofa?.toLowerCase().includes(pass.mofa.toLowerCase())
+          );
+        }
+        if (pass.bio_finger) {
+          result = result.filter((item) =>
+            item.bio_finger?.toLowerCase().includes(pass.bio_finger.toLowerCase())
+          );
+        }
+        if (pass.training) {
+          result = result.filter((item) =>
+            item.training?.toLowerCase().includes(pass.training.toLowerCase())
+          );
+        }
+        if (pass.visa_no) {
+          result = result.filter((item) =>
+            item.visa_no?.toLowerCase().includes(pass.visa_no.toLowerCase())
+          );
+        }
+        if (pass.bmet_finger) {
+          result = result.filter((item) =>
+            item.bmet_finger?.toLowerCase().includes(pass.bmet_finger.toLowerCase())
+          );
+        }
+        if (pass.manpower) {
+          result = result.filter((item) =>
+            item.manpower?.toLowerCase().includes(pass.manpower.toLowerCase())
+          );
+        }
+        if (pass.delivery) {
+          result = result.filter((item) =>
+            item.delivery?.toLowerCase().includes(pass.delivery.toLowerCase())
+          );
+        }
+    
+        setFilter(result);
+      }, [pass, passenger]);
     const extractedData = filter.map((row) => ({
         Name: row?.name,
         Passport: row?.passport_no,
@@ -148,16 +269,53 @@ const Admin_Table = ({passenger}) => {
         "Visa No": row?.visa_no,
         "ID No": row?.id_no,
         "Visa Stamping Date": row?.visa_stamping_date,
-        "Training": row?.trainging,
+        "Training": row?.training,
         "BMET Finger": row?.bmet_finger,
         "Manpower": row?.manpower,
         "Delivery": row?.delivery,
         "Payment": row?.payment,
         "Remark": row?.remark,
     }))
+    console.log(pass)
   return (
     <>
-    
+    <div>
+    <div className="!bg-blue-400 flex gap-2 mx-2 px-3 py-2">
+        <TextInput name="name" id="name" type="text" placeholder="Type Name" lebel="Agent Name" value={pass.name} handleChange={(e)=>{setPass({...pass,name:e.target.value})}}/>
+        <TextInput name="medical" id="medical" type="text" placeholder="Type Medical" lebel="Medical" value={pass.medical} handleChange={(e)=>{setPass({...pass,medical:e.target.value})}}/>
+        <TextInput name="mofa" id="mofa" type="text" placeholder="Type mofa" lebel="Mofa" value={pass.mofa} handleChange={(e)=>{setPass({...pass,mofa:e.target.value})}}/>
+        <TextInput name="manpower" id="manpower" type="text" placeholder="Type manpower" lebel="Manpower" value={pass.manpower} handleChange={(e)=>{setPass({...pass,manpower:e.target.value})}}/>
+        
+        <div className="mb-4">
+        <label className="block  text-white">Training Info</label>
+        <select
+         name="training" id="training" placeholder="Type Training Info" lebel="Training" value={pass.training} 
+          className="form-input mt-1 block w-full p-2 text-black"
+          onChange={(e) => {setPass({...pass, training: e.target.value})}}
+        >
+        <option value="">Select Options</option>
+        <option value="Yes" >YES</option>
+        <option value="No" >NO</option>
+        
+        
+        </select>
+      </div>
+        <div className="mb-4">
+        <label className="block  text-white">BMET Finger</label>
+        <select
+         name="bmet_finger" id="bmet_finger" placeholder="Type Info" lebel="bmet_finger" value={pass.bmet_finger} 
+          className="form-input mt-1 block w-full p-2 text-black"
+          onChange={(e) => {setPass({...pass, bmet_finger: e.target.value})}}
+        >
+        <option value="">Select Options</option>
+        <option value="Yes" >YES</option>
+        <option value="No" >NO</option>
+        
+        
+        </select>
+      </div>
+       
+    </div>
     <DataTable
 
             columns={columns}
@@ -172,6 +330,7 @@ const Admin_Table = ({passenger}) => {
             }
             subHeaderAlign="left"
         />
+        </div>
         </>
   )
 }
