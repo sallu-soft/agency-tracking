@@ -81,16 +81,21 @@ const Admin_Table = ({passenger}) => {
         {
             name: <p className="font-bold text-lg">Medical</p>,
             selector: row => {
-              const now = new Date();
               const medicalDate = row?.medical_date ? new Date(row.medical_date) : null;
               
-              // Calculate the difference if medicalDate is available
+              
+             
+              const now = new Date();
+
+              // Calculate the difference in days
+              const timeDiff = now.getTime() - medicalDate?.getTime();
+              let daysElapsed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
               let daysRemaining = 'N/A';
-              if (medicalDate) {
-                  const timeDiff = medicalDate.getTime() - now.getTime();
-                  daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                  daysRemaining = Math.max(90-daysRemaining, 0);
+              if (daysElapsed >= 0 && daysElapsed <= 90) {
+                  daysRemaining = Math.max(90 - daysElapsed, 0);
               }
+             
   
               return (
                   <div className="font-semibold">
@@ -126,15 +131,20 @@ const Admin_Table = ({passenger}) => {
         {
             name: <p className="font-bold text-lg">Visa Stamping Date</p>,
             selector: row => {
-              const now = new Date();
+              
             const visaDate = row?.visa_stamping_date ? new Date(row.visa_stamping_date) : null;
             
             // Calculate the difference if medicalDate is available
+            
+            const now = new Date();
+
+            // Calculate the difference in days
+            const timeDiff = now.getTime() - visaDate?.getTime();
+            let daysElapsed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
             let daysRemaining = 'N/A';
-            if (visaDate) {
-                const timeDiff = visaDate.getTime() - now.getTime();
-                daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                daysRemaining = Math.max(90-daysRemaining, 0);
+            if (daysElapsed >= 0 && daysElapsed <= 90) {
+                daysRemaining = Math.max(90 - daysElapsed, 0);
             }
 
             return (
