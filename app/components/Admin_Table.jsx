@@ -26,7 +26,7 @@ const Admin_Table = ({passenger}) => {
         manpower:"",
 
     });
-    const [daysRemaining, setDaysRemaining] = useState(0);
+    
     const user =  typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem('user')) : false;
     useEffect(()=>{
         if(!user){
@@ -102,7 +102,7 @@ const Admin_Table = ({passenger}) => {
                       {row.medical} <br />
                       {medicalDate ? formatDate(medicalDate) : 'N/A'}<br />
                       <span className="text-red-600">
-                          {daysRemaining === 'N/A' ? '' : `${daysRemaining} days remaining`}
+                          {daysRemaining === 'N/A' ? 'Expired' : `${daysRemaining} days remaining`}
                       </span>
                   </div>
               );
@@ -134,7 +134,12 @@ const Admin_Table = ({passenger}) => {
               
             const visaDate = row?.visa_stamping_date ? new Date(row.visa_stamping_date) : null;
             
-            // Calculate the difference if medicalDate is available
+            let formattedVisaDate = 'N/A';
+            if (visaDate && !isNaN(visaDate.getTime())) {
+                formattedVisaDate = formatDate(visaDate);
+            }else{
+                formattedVisaDate = row?.visa_stamping_date;
+            }
             
             const now = new Date();
 
@@ -150,7 +155,7 @@ const Admin_Table = ({passenger}) => {
             return (
                 <div className="font-semibold">
                     
-                    {visaDate ? formatDate(visaDate) : 'N/A'}<br />
+                    {formattedVisaDate}<br />
                     <span className="text-red-600">
                         {daysRemaining === 'N/A' ? '' : `${daysRemaining} days remaining`}
                     </span>
