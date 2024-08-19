@@ -91,19 +91,24 @@ const Admin_Table = ({passenger}) => {
               const timeDiff = now.getTime() - medicalDate?.getTime();
               let daysElapsed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
-              let daysRemaining = 'N/A';
+              let daysRemaining = 0;
               if (daysElapsed >= 0 && daysElapsed <= 90) {
                   daysRemaining = Math.max(90 - daysElapsed, 0);
               }
              
-  
+              
               return (
                   <div className="font-semibold">
                       {row.medical} <br />
                       {medicalDate ? formatDate(medicalDate) : 'N/A'}<br />
                       <span className="text-red-600">
-                          {daysRemaining === 'N/A' ? '' : `${daysRemaining} days remaining`}
-                          {daysRemaining <= 0 ? 'Expired' : ``}
+                      {
+                         medicalDate == null
+                          ? '' 
+                          :  daysRemaining <= 0 
+                            ? 'Expired' 
+                            : `${daysRemaining} days remaining`
+                      }
                       </span>
                   </div>
               );
