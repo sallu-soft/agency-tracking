@@ -102,7 +102,8 @@ const Admin_Table = ({passenger}) => {
                       {row.medical} <br />
                       {medicalDate ? formatDate(medicalDate) : 'N/A'}<br />
                       <span className="text-red-600">
-                          {daysRemaining === 'N/A' ? 'Expired' : `${daysRemaining} days remaining`}
+                          {daysRemaining === 'N/A' ? '' : `${daysRemaining} days remaining`}
+                          {daysRemaining <= 0 ? 'Expired' : ``}
                       </span>
                   </div>
               );
