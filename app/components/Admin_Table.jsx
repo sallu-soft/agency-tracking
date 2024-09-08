@@ -12,7 +12,7 @@ import TextInput from './TextInput';
 const Admin_Table = ({passenger}) => {
     const router = useRouter()
     const [search, setSearch]= useState('');
-    
+    const [users, setUsers] = useState([]);
     const [filter, setFilter]= useState([]);
     const [pass, setPass]= useState({
         name:"",
@@ -217,6 +217,23 @@ const Admin_Table = ({passenger}) => {
         setFilter(result);
     },[search]);
     useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`/api/user`);
+          if (!response.ok) {
+            throw new Error("Failed to fetch users");
+          }
+          const data = await response.json();
+          setUsers(data); // assuming data is an array of users
+        } catch (error) {
+          console.error(error);
+          // Handle error, e.g., set an error state
+        }
+      };
+  
+      fetchData();
+    }, []); 
+    useEffect(() => {
       // Update the countdown every 24 hours
       const interval = setInterval(() => {
         setDaysRemaining((prev) => Math.max(prev - 1, 0));
@@ -302,7 +319,11 @@ const Admin_Table = ({passenger}) => {
     <>
     <div>
     <div className="!bg-blue-400 flex gap-2 mx-2 px-3 py-2">
-        <TextInput name="name" id="name" type="text" placeholder="Type Name" lebel="Agent Name" value={pass.name} handleChange={(e)=>{setPass({...pass,name:e.target.value})}}/>
+        <TextInput name="name" id="name" type="text" placeholder="Type Name" lebel="Agent Name" list="agents" value={pass.name} handleChange={(e)=>{setPass({...pass,name:e.target.value})}}/>
+        <datalist id="agents">
+            <option value="" disabled>Select Agent</option>
+            {users.map(user => <option key={user._id} value={user.name}>{user.name}</option>)}
+        </datalist>
         <TextInput name="medical" id="medical" type="text" placeholder="Type Medical" lebel="Medical" value={pass.medical} handleChange={(e)=>{setPass({...pass,medical:e.target.value})}}/>
         <TextInput name="mofa" id="mofa" type="text" placeholder="Type mofa" lebel="Mofa" value={pass.mofa} handleChange={(e)=>{setPass({...pass,mofa:e.target.value})}}/>
         <TextInput name="manpower" id="manpower" type="text" placeholder="Type manpower" lebel="Manpower" value={pass.manpower} handleChange={(e)=>{setPass({...pass,manpower:e.target.value})}}/>
