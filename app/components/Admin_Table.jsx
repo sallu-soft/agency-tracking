@@ -101,7 +101,7 @@ const Admin_Table = ({passenger}) => {
                   <div className="font-semibold">
                       {row.medical} <br />
                       {medicalDate ? formatDate(medicalDate) : 'N/A'}<br />
-                      <span className={daysRemaining<=10?"text-red-700":"text-green-600"}>
+                      <span className={daysRemaining<=10?"text-red-700 py-2":"text-green-600 py-2"}>
                       {
                          medicalDate == null
                           ? '' 
@@ -110,9 +110,19 @@ const Admin_Table = ({passenger}) => {
                             : `${daysRemaining} days remaining`
                       }
                       </span>
+                    
+                     
                   </div>
               );
           },
+            wrap:true,
+            minWidth:"150px",
+        },
+        {
+            name: <p className="font-bold text-lg">Medical Status</p>,
+            selector: row => {
+              return  <p className={`${(row?.medical_status=="Unfit")?"p-1 text-md rounded-lg bg-red-600 text-white":"bg-green-700 p-1 text-md text-white rounded-lg"} `}>{row.medical_status}</p>
+            },
             wrap:true,
         },
         {
@@ -122,8 +132,9 @@ const Admin_Table = ({passenger}) => {
         },
         {
             name: <p className="font-bold text-lg">Biometric Finger</p>,
-            selector: row => <div className="min-w-[230px] flex gap-1 flex-col p-1"><h3 className="">{row.bio_finger}</h3><p>{row.bio_status}</p></div>,
+            selector: row => <div className="min-w-[230px] flex gap-1 flex-col p-1"><h3 className="">{row?.bio_finger}</h3><p className={`${(row?.bio_status=="Processing")?"bg-red-600 text-md p-1 w-fit text-white rounded-lg":""}bg-green-700 text-md p-1 w-fit text-white rounded-lg`}>{row?.bio_status}</p></div>,
             wrap:true,
+            minWidth:"120px"
         },
         {
             name: <p className="font-bold text-lg">PC No</p>,
@@ -170,13 +181,17 @@ const Admin_Table = ({passenger}) => {
           },
         },
         {
-            name: <p className="font-bold text-lg">Training</p>,
-            selector: row => row.training ,
+            name: <p className="font-bold text-lg">Training/BMET Finger</p>,
+            selector: row => {
+              return <div className="flex flex-col gap-2">
+                <p>Training: {row?.training}</p>
+                <p>BMET Finger: {row?.bmet_finger}</p>
+              </div>
+            },
+            wrap:true,
+            minWidth:"200px"
         },
-        {
-            name: <p className="font-bold text-lg">BMET Finger</p>,
-            selector: row => row.bmet_finger ,
-        },
+        
        
         {
             name: <p className="font-bold text-lg">Manpower</p>,

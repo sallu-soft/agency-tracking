@@ -209,6 +209,7 @@ const AddEntry = () => {
     gender:"",
     country:"Saudia Arabia",
     medical:"",
+    medical_status:"",
     medical_date:"",
     mofa:"",
     bio_finger:"",
@@ -258,6 +259,7 @@ const AddEntry = () => {
       gender,
       country,
       medical,
+      medical_status,
       medical_date,
       mofa,
       bio_finger,
@@ -288,6 +290,7 @@ const AddEntry = () => {
           gender,
           country,
           medical,
+          medical_status,
           medical_date,
           mofa,
           bio_finger,
@@ -390,7 +393,22 @@ const AddEntry = () => {
       
       <TextInput name="medical_date" id="medical_date" lebel="Medical Date" value={passenger.medical_date} type="date"  handleChange={(e)=>{setPassenger({...passenger,medical_date:e.target.value})}} />
       <TextInput name="medical" id="medical" placeholder="Medical Name" lebel="Medical Name" value={passenger.medical} type="text"  handleChange={(e)=>{setPassenger({...passenger,medical:e.target.value})}} />
-      
+      <div className="mb-4 w-full">
+        <label className="block  text-white">Medical Status</label>
+        <select
+         name="medical_status" id="medical_status" placeholder="Medical Status" lebel="Medical Status" value={passenger.medical_status} 
+          className="form-input mt-1 block h-10 w-full p-2 text-black"
+          onChange={(e) => {setPassenger({...passenger, medical_status: e.target.value})}}
+        >
+        <option value="" disabled>Select Options</option>
+        <option value="Pending" >Pending</option>
+        <option value="Fit" >Fit</option>
+        <option value="Unfit" >Unfit</option>
+        <option value="Interview" >Interview</option>
+        
+        
+        </select>
+      </div>
       <TextInput name="mofa" id="mofa" type="date" placeholder="Type Mofa" lebel="Mofa" value={passenger.mofa} handleChange={(e)=>{setPassenger({...passenger,mofa:e.target.value})}} />
 
       
